@@ -4,94 +4,80 @@ import datetime
 # --- PAGE CONFIG ---
 st.set_page_config(page_title="Nova Resource Labs", page_icon="🛰️", layout="wide")
 
-# --- HIGH-TECH CSS INJECTION ---
+# --- CSS: THE "ASTROFORGE" UPGRADE ---
 st.markdown("""
     <style>
-    /* Deep Space Background */
-    .stApp {
-        background: radial-gradient(circle at top right, #1a1a2e, #0f0f1a, #000000);
-        color: #e0e0e0;
+    .stApp { background-color: #050505; color: #ffffff; }
+    
+    /* Glass Effect */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(0, 212, 255, 0.2);
+        padding: 25px;
+        border-radius: 10px;
+        margin-bottom: 15px;
     }
     
-    /* Glassmorphism Containers */
-    div[data-testid="stVerticalBlock"] > div:has(div.stMarkdown) {
-        background: rgba(255, 255, 255, 0.03);
-        backdrop-filter: blur(10px);
-        border-radius: 15px;
-        padding: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        margin-bottom: 20px;
-    }
-
-    /* Professional Headers */
-    h1, h2, h3 {
-        font-family: 'Inter', sans-serif;
-        letter-spacing: -1px;
-        text-transform: uppercase;
-        color: #00d4ff !important;
-    }
-
-    /* Metric Styling */
-    [data-testid="stMetricValue"] {
-        font-size: 2rem;
-        color: #ffffff;
-        font-weight: 800;
-    }
-    
-    /* Custom Button */
-    .stButton>button {
-        width: 100%;
-        background-color: transparent;
+    /* Neon Text */
+    .neon-text {
         color: #00d4ff;
-        border: 2px solid #00d4ff;
-        transition: 0.3s;
-        font-weight: bold;
+        text-shadow: 0 0 10px #00d4ff;
+        font-family: 'Courier New', Courier, monospace;
     }
-    .stButton>button:hover {
-        background-color: #00d4ff;
-        color: black;
-        box-shadow: 0 0 20px #00d4ff;
+    
+    /* Ticker Animation */
+    @keyframes scroll {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+    }
+    .ticker {
+        white-space: nowrap;
+        overflow: hidden;
+        background: #111;
+        padding: 10px 0;
+        border-top: 1px solid #333;
+        border-bottom: 1px solid #333;
+        color: #00ff00;
+        font-family: monospace;
     }
     </style>
     """, unsafe_allow_html=True)
 
-# --- SIDEBAR: MISSION LOG ---
-with st.sidebar:
-    st.image("https://img.icons8.com/ios-filled/100/00d4ff/satellite.png")
-    st.title("NOVA OPS")
-    st.status("Orion Sync: ACTIVE", state="complete")
-    st.write("---")
-    st.caption("Current Window: April 2026")
-    st.caption("Asset: 2013 GM3")
+# --- TOP TICKER ---
+st.markdown("""<div class="ticker">
+    IRIDIUM: $5,120.00 (+2.4%) | PLATINUM: $1,085.50 (+0.8%) | OSMIUM: $400.00 (+0.1%) | NOVA STATUS: ORBITAL LOCK CONFIRMED
+    </div>""", unsafe_allow_html=True)
 
-# --- MAIN PAGE ---
-st.title("Nova Resource Labs")
-st.write("### Architecting the Next Frontier of Mineral Intelligence.")
+# --- HEADER ---
+st.title("NOVA RESOURCE LABS")
+st.write("### Oputa Orbital Systems & Mineral Intelligence")
 
-# --- MISSION DATA TILES ---
-col1, col2, col3 = st.columns(3)
-with col1:
-    st.metric("Valuation", "$1.2 Billion", "+12% Market")
-with col2:
-    st.metric("Purity", "18% Iridium", "Grade: Tier-1")
-with col3:
-    st.metric("Distance", "8,620 KM", "Perigee Locked")
+# --- THE LIVE STAR MAP ---
+st.write("#### Live Celestial Tracking (Sector 0-14)")
+# This embeds a live interactive star map
+st.components.v1.iframe("https://slowe.github.io/VirtualSky/embed?longitude=3.3792&latitude=6.5244&projection=gnomic&constellations=true&constellationlabels=true&showstarlabels=true&live=true", height=500)
 
-# --- THE TEAM (The Oputa Brothers) ---
+# --- MISSION TILES ---
 st.write("---")
-st.header("The Intelligence Core")
-col_a, col_b = st.columns(2)
+c1, c2, c3 = st.columns(3)
+with c1:
+    st.markdown('<div class="glass-card"><h2 class="neon-text">$1.2B</h2><p>Projected Bounty</p></div>', unsafe_allow_html=True)
+with c2:
+    st.markdown('<div class="glass-card"><h2 class="neon-text">18%</h2><p>Iridium Concentration</p></div>', unsafe_allow_html=True)
+with c3:
+    st.markdown('<div class="glass-card"><h2 class="neon-text">Apr 14</h2><p>2026 Perigee Window</p></div>', unsafe_allow_html=True)
 
-with col_a:
+# --- THE OPUTA LEGACY (Bios) ---
+st.header("Strategic Leadership")
+ba, bb = st.columns(2)
+with ba:
     st.subheader("Daniel Oputa")
     st.caption("Lead Architect")
-    st.write("Creator of the Orion Intelligence Layer. Daniel directs the lab's spectroscopic research and valuation logic.")
-
-with col_b:
+    st.write("Proprietary Orion Intelligence Layer development and spectroscopic logic.")
+with bb:
     st.subheader("Emmanuel Oputa")
     st.caption("Chief of Operations")
-    st.write("Lead of orbital logistics and trajectory integrity. Emmanuel oversees the operational security of all mission-critical data.")
+    st.write("Orbital logistics, telemetry integrity, and secure data-rights acquisition.")
 
-# --- CONTACT CTA ---
-st.write("---")
-st.button("REQUEST SECURE DATA ACCESS (MNDA REQUIRED)")
+# --- FOOTER ---
+st.button("ENCRYPTED INQUIRY / MNDA REQUEST")
