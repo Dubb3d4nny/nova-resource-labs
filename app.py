@@ -4,45 +4,94 @@ import datetime
 # --- PAGE CONFIG ---
 st.set_page_config(page_title="Nova Resource Labs", page_icon="🛰️", layout="wide")
 
-# --- CUSTOM THEME (AstroForge Style) ---
+# --- HIGH-TECH CSS INJECTION ---
 st.markdown("""
     <style>
-    .main { background-color: #0E1117; color: #FFFFFF; }
-    div.stButton > button:first-child {
-        background-color: #0078D4; color: white; border-radius: 5px;
+    /* Deep Space Background */
+    .stApp {
+        background: radial-gradient(circle at top right, #1a1a2e, #0f0f1a, #000000);
+        color: #e0e0e0;
     }
-    .stMarkdown h1 { color: #E0E0E0; font-family: 'Inter', sans-serif; font-weight: 800; }
+    
+    /* Glassmorphism Containers */
+    div[data-testid="stVerticalBlock"] > div:has(div.stMarkdown) {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 20px;
+    }
+
+    /* Professional Headers */
+    h1, h2, h3 {
+        font-family: 'Inter', sans-serif;
+        letter-spacing: -1px;
+        text-transform: uppercase;
+        color: #00d4ff !important;
+    }
+
+    /* Metric Styling */
+    [data-testid="stMetricValue"] {
+        font-size: 2rem;
+        color: #ffffff;
+        font-weight: 800;
+    }
+    
+    /* Custom Button */
+    .stButton>button {
+        width: 100%;
+        background-color: transparent;
+        color: #00d4ff;
+        border: 2px solid #00d4ff;
+        transition: 0.3s;
+        font-weight: bold;
+    }
+    .stButton>button:hover {
+        background-color: #00d4ff;
+        color: black;
+        box-shadow: 0 0 20px #00d4ff;
+    }
     </style>
     """, unsafe_allow_html=True)
 
-# --- HEADER SECTION ---
-col1, col2 = st.columns([2, 1])
+# --- SIDEBAR: MISSION LOG ---
+with st.sidebar:
+    st.image("https://img.icons8.com/ios-filled/100/00d4ff/satellite.png")
+    st.title("NOVA OPS")
+    st.status("Orion Sync: ACTIVE", state="complete")
+    st.write("---")
+    st.caption("Current Window: April 2026")
+    st.caption("Asset: 2013 GM3")
+
+# --- MAIN PAGE ---
+st.title("Nova Resource Labs")
+st.write("### Architecting the Next Frontier of Mineral Intelligence.")
+
+# --- MISSION DATA TILES ---
+col1, col2, col3 = st.columns(3)
 with col1:
-    st.title("NOVA RESOURCE LABS")
-    st.subheader("Architecting the Next Frontier of Mineral Intelligence.")
-    st.write("Specializing in high-fidelity spectroscopic tracking and orbital resource valuation.")
+    st.metric("Valuation", "$1.2 Billion", "+12% Market")
+with col2:
+    st.metric("Purity", "18% Iridium", "Grade: Tier-1")
+with col3:
+    st.metric("Distance", "8,620 KM", "Perigee Locked")
 
-# --- MISSION STATUS (The Countdown) ---
-st.divider()
-target_date = datetime.datetime(2026, 4, 14, 12, 0)
-time_left = target_date - datetime.datetime.now()
-
-st.metric(label="TIME TO PERIGEE (2013 GM3)", value=f"{time_left.days} Days", delta="-1.2% Orbital Decay")
-
-# --- ABOUT US / THE CORE TEAM ---
+# --- THE TEAM (The Oputa Brothers) ---
+st.write("---")
 st.header("The Intelligence Core")
 col_a, col_b = st.columns(2)
 
 with col_a:
-    st.markdown("### Daniel [Your Last Name]")
-    st.caption("Lead Architect & Orbital Strategist")
-    st.write("Pioneering localized deep-space tracking systems. Daniel leads the development of the Orion Interface, bridging the gap between raw spectral data and trillion-dollar asset valuation.")
+    st.subheader("Daniel Oputa")
+    st.caption("Lead Architect")
+    st.write("Creator of the Orion Intelligence Layer. Daniel directs the lab's spectroscopic research and valuation logic.")
 
 with col_b:
-    st.markdown("### Emmanuel [Last Name]")
-    st.caption("Chief of Orbital Operations")
-    st.write("Expert in orbital logistics and mission-critical data integrity. Emmanuel ensures the precision of Nova's trajectory modeling and international telemetry sync.")
+    st.subheader("Emmanuel Oputa")
+    st.caption("Chief of Operations")
+    st.write("Lead of orbital logistics and trajectory integrity. Emmanuel oversees the operational security of all mission-critical data.")
 
-# --- FOOTER ---
-st.divider()
-st.info("📩 Inquiries for Secure Data Access (MNDA required) available via DMs.")
+# --- CONTACT CTA ---
+st.write("---")
+st.button("REQUEST SECURE DATA ACCESS (MNDA REQUIRED)")
